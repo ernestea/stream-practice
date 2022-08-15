@@ -51,14 +51,12 @@ public class Practice {
 
     // Display all the departments
     public static List<Department> getAllDepartments() {
-
         return departmentService.readAll();
     }
 
     // Display all the jobs
     public static List<Job> getAllJobs() {
-        //TODO Implement the method
-        return new ArrayList<>();
+        return jobService.readAll();
     }
 
     // Display all the locations
