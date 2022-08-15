@@ -84,32 +84,40 @@ public class Practice {
 
     // Display all the countries' names
     public static List<String> getAllCountryNames() {
-        //TODO Implement the method
-        return new ArrayList<>();
+        return countryService.readAll().stream()
+                .map(Country::getCountryName)
+                .collect(Collectors.toList());
     }
 
     // Display all the departments' managers' first names
     public static List<String> getAllDepartmentManagerFirstNames() {
-        //TODO Implement the method
-        return new ArrayList<>();
+        return departmentService.readAll().stream()
+                .map(Department::getManager)
+                .map(Employee::getFirstName)
+                .collect(Collectors.toList());
     }
 
     // Display all the departments where manager name of the department is 'Steven'
     public static List<Department> getAllDepartmentsWhichManagerFirstNameIsSteven() {
-        //TODO Implement the method
-        return new ArrayList<>();
+        return departmentService.readAll().stream()
+                .filter(dep -> dep.getManager().getFirstName().equals("Steven"))
+                .collect(Collectors.toList());
     }
 
     // Display all the departments where postal code of the location of the department is '98199'
     public static List<Department> getAllDepartmentsWhereLocationPostalCodeIs98199() {
-        //TODO Implement the method
-        return new ArrayList<>();
+        return departmentService.readAll().stream()
+                .filter(dep -> dep.getLocation().getPostalCode().equals("98199"))
+                .collect(Collectors.toList());
     }
 
     // Display the region of the IT department
     public static Region getRegionOfITDepartment() throws Exception {
-        //TODO Implement the method
-        return new Region();
+        return departmentService.readAll().stream()
+                .filter(dep -> dep.getDepartmentName().equals("IT"))
+                .map(dep -> dep.getLocation().getCountry().getRegion())
+                .findFirst()
+                .get();
     }
 
     // Display all the departments where the region of department is 'Europe'
